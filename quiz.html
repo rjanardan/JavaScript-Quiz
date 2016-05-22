@@ -1,3 +1,21 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @nadranaj
+ Unwatch 2
+  Star 1
+  Fork 15 nadranaj/JavaScript-Quiz
+forked from jrue/JavaScript-Quiz
+ Code  Pull requests 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy path
+JavaScript-Quiz/quiz.html
+a94389b  on Jun 18, 2015
+@nadranaj nadranaj Now 'correct' answer is just index of 'choices'. This removes strings…
+1 contributor
+RawBlameHistory    243 lines (223 sloc)  11.3 KB
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +36,7 @@
      * WITHOUT ANY WARRANTY; without even the implied warranty of
      * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
      */
-
     var quiztitle = "Quiz Title";
-
     /**
     * Set the information about your questions here. The correct answer string needs to match
     * the correct choice exactly, as it does string matching. (case sensitive)
@@ -36,7 +52,7 @@
                                     "Albert Einstein",
                                     "Ralph Waldo Emmerson"
                                 ],
-            "correct"       :   "Albert Einstein",
+            "correct"       :   "2",
             "explanation"   :   "Albert Einstein drafted the special theory of relativity in 1905.",
         },
         {
@@ -48,7 +64,7 @@
                                     "Benjamin Franklin",
                                     "Abraham Lincoln"
                                 ],
-            "correct"       :   "Thomas Jefferson",
+            "correct"       :   "0",
             "explanation"   :   "The two dollar bill is seldom seen in circulation. As a result, some businesses are confused when presented with the note.",
         },
         {
@@ -60,18 +76,13 @@
                                     "American Civil War began",
                                     "Declaration of Independence"
                                 ],
-            "correct"       :   "American Civil War began",
+            "correct"       :   "2",
             "explanation"   :   "South Carolina came under attack when Confederate soldiers attacked Fort Sumter. The war lasted until April 9th 1865.",
         },
-
     ];
-
-
     /******* No need to edit below this line *********/
     var currentquestion = 0, score = 0, submt=true, picked;
-
     jQuery(document).ready(function($){
-
         /**
          * HTML Encoding function for alt tags and attributes to prevent messy
          * data appearing inside tag attributes.
@@ -79,7 +90,6 @@
         function htmlEncode(value){
           return $(document.createElement('div')).text(value).html();
         }
-
         /**
          * This will add the individual choices for each question to the ul#choice-block
          *
@@ -114,14 +124,14 @@
             addChoices(quiz[currentquestion]['choices']);
             setupButtons();
         }
-
         /**
          * After a selection is submitted, checks if its the right answer
          *
          * @param {choice} number The li zero-based index of the choice picked
          */
         function processQuestion(choice){
-            if(quiz[currentquestion]['choices'][choice] == quiz[currentquestion]['correct']){
+            correctanswer = quiz[currentquestion]['correct'];
+            if(quiz[currentquestion]['choices'][choice] == quiz[currentquestion]['choices'][correctanswer]){
                 $('.choice').eq(choice).css({'background-color':'#50D943'});
                 $('#explanation').html('<strong>Correct!</strong> ' + htmlEncode(quiz[currentquestion]['explanation']));
                 score++;
@@ -139,7 +149,6 @@
                 }
             })
         }
-
         /**
          * Sets up the event listeners for each button.
          */
@@ -176,7 +185,6 @@
             $('#question').text("You got " + score + " out of " + quiz.length + " correct.");
             $(document.createElement('h2')).css({'text-align':'center', 'font-size':'4em'}).text(Math.round(score/quiz.length * 100) + '%').insertAfter('#question');
         }
-
         /**
          * Runs the first time and creates all of the elements for the quiz
          */
@@ -187,7 +195,6 @@
             } else {
                 $(document.createElement('h1')).text("Quiz").appendTo('#frame');
             }
-
             //add pager and questions
             if(typeof quiz !== "undefined" && $.type(quiz) === "array"){
                 //add pager
@@ -239,3 +246,5 @@
     <div id="frame" role="content"></div>
 </body>
 </html>
+Status API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
